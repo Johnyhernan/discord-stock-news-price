@@ -9,15 +9,16 @@ client = commands.Bot(command_prefix='$', intents=intents)
 async def ready():
     print('run')
 
-
+'''retrieving news headlines on $no (ticker)'''
 @client.command()
 async def no(ctx,arg):
     temp=(arg.upper())
     arg=temp
     new=[]
     stock=[]
-    new=getData(arg)        
-
+    new=getData(arg)   
+    
+    '''x will equal the current amount of headlines you want the discord bot to show with the max being 30 anything above thirty will cause it to run out of bounds'''
     x=10
     while(x>0):
         
@@ -29,6 +30,8 @@ async def no(ctx,arg):
     embed.add_field(name="News", value=stock)
     await ctx.send(embed=embed)
     return
+    
+'''retrieving stock info on $price (ticker)'''
 @client.command()
 async def price(ctx,arg):
     temp=(arg.upper())
@@ -47,22 +50,6 @@ async def price(ctx,arg):
     await ctx.send(embed=embed)
     return
 
-           
-@client.command() 
-async def news(ctx,arg):
-    temp=(arg.upper())
-    arg=temp
-    for item in getPrice(arg):
-        await ctx.send(item)
-    new=[]
-    new=getData(arg)
-    x=10
-    while(x>0):
-        
-        await ctx.send(str(x)+':'+new[x-1])
-        x-=1
-    '''await ctx.send(stock)'''
-    return 
 
 
 client.run('[TOKEN]')
